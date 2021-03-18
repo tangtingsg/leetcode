@@ -64,18 +64,18 @@ var subarraySum2 = function(nums, k) {
   let count = 0;
   for (const num of nums) {
     sumj += num;
-    const sumCount = sumjMap.get(sumj) || 0;
     if (sumjMap.has(sumj - k)) {
       count += sumjMap.get(sumj - k);
     }
+    const sumCount = sumjMap.get(sumj) || 0;
     sumjMap.set(sumj, sumCount + 1)
   }
   return count;
 }
 
-// console.log(subarraySum2([1, 1, 1], 2) === 2);
-// console.log(subarraySum2([1, 2, 3], 2) === 1);
-// console.log(subarraySum2([1], 0) === 0);
-// console.log(subarraySum2([1, -1, 0], 0) === 3);
-// console.log(subarraySum2([1, 2, 1, 2, 1], 3) === 4);
-// console.log(subarraySum2([0, 0, 0, 0, 0, 0], 0) === 21);
+console.log(subarraySum2([1, 1, 1], 2) === 2);
+console.log(subarraySum2([1, 2, 3], 2) === 1);
+console.log(subarraySum2([1], 0) === 0);
+console.log(subarraySum2([1, -1, 0], 0) === 3);
+console.log(subarraySum2([1, 2, 1, 2, 1], 3) === 4);
+console.log(subarraySum2([0, 0, 0, 0, 0, 0], 0) === 21);
