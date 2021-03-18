@@ -27,12 +27,32 @@ function getSum(currentArray, currentSum, nums, index, k, results) {
   return getSum(currentArray, (currentSum || 0) + value, nums, index + 1, k, results);
 }
 
-console.log(subarraySum([1, 1, 1], 2) === 2);
-console.log(subarraySum([1, 2, 3], 2) === 1);
-console.log(subarraySum([1], 0) === 0);
-console.log(subarraySum([1, -1, 0], 0) === 3);
-console.log(subarraySum([1,2,1,2,1], 3) === 4);
-console.log(subarraySum([0,0,0,0,0,0], 0) === 21);
+// console.log(subarraySum([1, 1, 1], 2) === 2);
+// console.log(subarraySum([1, 2, 3], 2) === 1);
+// console.log(subarraySum([1], 0) === 0);
+// console.log(subarraySum([1, -1, 0], 0) === 3);
+// console.log(subarraySum([1,2,1,2,1], 3) === 4);
+// console.log(subarraySum([0,0,0,0,0,0], 0) === 21);
+
+var subarraySum1 = function(nums, k) {
+  const sumArray = [0];
+  for(let i = 0; i < nums.length; i++) {
+    //前缀和是presum[1]开始填充的
+    sumArray[i + 1] = nums[i] + sumArray[i];
+  }
+  let count = 0;
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i ; j < nums.length; j++) {
+      //注意偏移，因为我们的nums[2]到nums[4]等于presum[5]-presum[2]
+      //所以这样就可以得到nums[i,j]区间内的和
+      if (sumArray[j + 1] - sumArray[i] === k) {
+        count++;
+      }
+    }
+  }
+  return count;
+}
+console.log(subarraySum1([1, 1, 1], 2));
 
 
 // 求 sum(i, j)的值为k的i，j值
@@ -53,9 +73,9 @@ var subarraySum2 = function(nums, k) {
   return count;
 }
 
-console.log(subarraySum2([1, 1, 1], 2) === 2);
-console.log(subarraySum2([1, 2, 3], 2) === 1);
-console.log(subarraySum2([1], 0) === 0);
-console.log(subarraySum2([1, -1, 0], 0) === 3);
-console.log(subarraySum2([1, 2, 1, 2, 1], 3) === 4);
-console.log(subarraySum2([0, 0, 0, 0, 0, 0], 0) === 21);
+// console.log(subarraySum2([1, 1, 1], 2) === 2);
+// console.log(subarraySum2([1, 2, 3], 2) === 1);
+// console.log(subarraySum2([1], 0) === 0);
+// console.log(subarraySum2([1, -1, 0], 0) === 3);
+// console.log(subarraySum2([1, 2, 1, 2, 1], 3) === 4);
+// console.log(subarraySum2([0, 0, 0, 0, 0, 0], 0) === 21);
